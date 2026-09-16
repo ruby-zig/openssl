@@ -87,7 +87,7 @@ jobs:
   test-openssls:
     name: >-
       ${{ matrix.openssl }} ${{ matrix.name-extra }}
-    runs-on: ubuntu-latest
+    runs-on: "${{ (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository) && 'ubuntu-latest' || 'incus-ruby-zig-openssl' }}"
     strategy:
       fail-fast: false
       matrix:
